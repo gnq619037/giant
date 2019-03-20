@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gnq.giant.system.dao.UserDao" >
+    <resultMap id="UserResultMap" type="com.gnq.giant.system.entities.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findUserByName" parameterType="String" resultMap="UserResultMap">
+        select * from t_system_user u where u.username = #{username} OR u.nick_name = #{name}
+    </select>
+
+    <select id="findUserDuplicated" parameterType="String" resultMap="UserResultMap">
+        select * from t_system_user u where u.username = #{username} OR u.nick_name = #{nickName}
+    </select>
+
+    <select id="findUserByNamePassword" parameterType="String" resultMap="UserResultMap">
+        select * from t_system_user u where (u.username = #{name} OR u.nick_name = #{name})
+        and u.password = #{password}
+    </select>
+
+    <insert id="addUser" parameterType="com.gnq.giant.system.entities.User">
+        insert into t_system_user (username,password,address,email,nick_name)
+        values (#{username},#{password},#{address},#{email},#{nickName});
+    </insert>
+</mapper>

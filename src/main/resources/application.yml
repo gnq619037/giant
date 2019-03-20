@@ -1,0 +1,24 @@
+#默认使用配置
+
+server:
+  port: 8081
+#公共配置与profiles选择无关
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  typeAliasesPackage: com.gnq.giant.*.entities
+  mapperLocations: classpath:mybatis/mapper/*.xml
+
+
+---
+
+#开发配置
+spring:
+#  profiles: dev
+  application:
+    name: microservicecloud-dept
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/giant
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
