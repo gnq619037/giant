@@ -1,9 +1,13 @@
 package com.gnq.giant.system.service.impl;
 
 import com.gnq.giant.system.dao.UserDao;
+import com.gnq.giant.system.entities.TokenModel;
 import com.gnq.giant.system.entities.User;
+import com.gnq.giant.system.service.TokenManagerInterface;
 import com.gnq.giant.system.service.UserService;
 import com.gnq.giant.util.MD5;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +26,14 @@ import java.util.Map;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private TokenManagerInterface tokenManagerInterface;
 
     public List<User> getUserByName(String name) {
         return userDao.findUserByName(name);
@@ -55,7 +65,9 @@ public class UserServiceImpl implements UserService {
         String passwordMD5 = MD5.md5(password);
         User user = userDao.findUserByNamePassword(name, passwordMD5);
         if(user != null){
+            TokenModel tokenModel = tokenManagerInterface.createToken(user);
             resultMap.put("msg", "登录成功");
+            resultMap.put("token", tokenModel.getToken());
             resultMap.put("success", true);
             return resultMap;
         }
