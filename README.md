@@ -8,3 +8,5 @@ Intellij IDEA 2016.3.5
 first version is cell, it will be giant...hold on
 #整合log4j2
 --import log4j2 2019-03-20
+#整合redis
+--import redis 2019-03-21
