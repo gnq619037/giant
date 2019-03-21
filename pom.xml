@@ -77,7 +77,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
@@ -88,7 +87,40 @@
       <artifactId>druid</artifactId>
       <version>1.0.31</version>
     </dependency>
-
+    <!--加入redis-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.lettuce</groupId>
+          <artifactId>lettuce-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>2.1.5.RELEASE</version>
+    </dependency>
+    <!-- 添加jedis客户端 -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <!--&lt;!&ndash;spring2.0集成redis所需common-pool2&ndash;&gt;-->
+    <!--&lt;!&ndash; 必须加上，jedis依赖此  &ndash;&gt;-->
+    <!--&lt;!&ndash; spring boot 2.0 的操作手册有标注 大家可以去看看 地址是：https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/reference/htmlsingle/&ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.commons</groupId>-->
+      <!--<artifactId>commons-pool2</artifactId>-->
+      <!--&lt;!&ndash;<version>RELEASE</version>&ndash;&gt;-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

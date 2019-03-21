@@ -55,6 +55,7 @@ public class UserController {
     @RequestMapping(value = "/checkSession", method = RequestMethod.GET)
     public Object checkSession(HttpServletRequest request){
         String token = request.getHeader("Token");
+//        TokenModel tokenModel = new TokenModel()
         return null;
     }
 }
