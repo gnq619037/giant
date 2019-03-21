@@ -21,6 +21,7 @@ import java.util.Map;
  * @Date: 13:45 2019/3/15
  */
 @RestController
+@RequestMapping(value = "/giant")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -46,6 +47,12 @@ public class UserController {
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public Object login(@RequestBody Map<String,Object> params){
+//        if(params.get("name") == null){
+//
+//        }
+//        if(params.get("password") == null){
+//
+//        }
         String name = params.get("name").toString();
         String password = params.get("password").toString();
         Map<String, Object> map = userService.userLogin(name, password);
@@ -55,7 +62,14 @@ public class UserController {
     @RequestMapping(value = "/checkSession", method = RequestMethod.GET)
     public Object checkSession(HttpServletRequest request){
         String token = request.getHeader("Token");
-//        TokenModel tokenModel = new TokenModel()
-        return null;
+        Map<String, Object> resultMap = userService.checkSession(token);
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
+    public Object userLogout(HttpServletRequest request){
+        String token = request.getHeader("Token");
+        Map<String, Object> resultMap = userService.userLogout(token);
+        return resultMap;
     }
 }

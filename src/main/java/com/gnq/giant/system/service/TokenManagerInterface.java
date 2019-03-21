@@ -20,5 +20,7 @@ public interface TokenManagerInterface {
      */
     public TokenModel createToken(User user);
 
-    public Map<String, Object> checkToken(TokenModel token);
+    public boolean checkToken(String token);
+
+    public boolean deleteToken(String token);
 }

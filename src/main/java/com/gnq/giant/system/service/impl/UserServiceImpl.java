@@ -75,4 +75,29 @@ public class UserServiceImpl implements UserService {
         resultMap.put("success", false);
         return resultMap;
     }
+
+    public Map<String, Object> checkSession(String token) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        boolean tokenExits = tokenManagerInterface.checkToken(token);
+        if(tokenExits){
+            resultMap.put("success", tokenExits);
+            resultMap.put("msg", "token延时");
+            return resultMap;
+        }
+        resultMap.put("success", tokenExits);
+        resultMap.put("msg", "token失效");
+        return resultMap;
+    }
+
+    public Map<String, Object> userLogout(String token) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        boolean isDelete = tokenManagerInterface.deleteToken(token);
+        resultMap.put("success", isDelete);
+        if(isDelete){
+            resultMap.put("msg", "用户登出");
+            return resultMap;
+        }
+        resultMap.put("msg", "用户登出失败");
+        return resultMap;
+    }
 }
