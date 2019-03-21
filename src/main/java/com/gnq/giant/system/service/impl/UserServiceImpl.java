@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
             resultMap.put("success", true);
             return resultMap;
         }
-        resultMap.put("msg", "登录失败");
+        resultMap.put("msg", "登录密码错误");
         resultMap.put("success", false);
         return resultMap;
     }
@@ -79,12 +79,11 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> checkSession(String token) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         boolean tokenExits = tokenManagerInterface.checkToken(token);
+        resultMap.put("success", tokenExits);
         if(tokenExits){
-            resultMap.put("success", tokenExits);
             resultMap.put("msg", "token延时");
             return resultMap;
         }
-        resultMap.put("success", tokenExits);
         resultMap.put("msg", "token失效");
         return resultMap;
     }
