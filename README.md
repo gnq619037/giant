@@ -4,6 +4,7 @@ git:git version 2.8.1.windows.1
 mysql:5.6.17
 jdk:1.8
 Intellij IDEA 2016.3.5
+Redis-x64-3.2.100
 #############################v1###################################
 first version is cell, it will be giant...hold on
 #整合log4j2
