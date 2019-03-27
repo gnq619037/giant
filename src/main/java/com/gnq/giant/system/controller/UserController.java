@@ -72,4 +72,12 @@ public class UserController {
         Map<String, Object> resultMap = userService.userLogout(token);
         return resultMap;
     }
+
+    @RequestMapping(value = "/user/get/all", method = RequestMethod.POST)
+    public Object getAllUser(@RequestBody Map<String,Object> params){
+        int currentNum = Integer.parseInt(params.get("currentNum").toString());
+        int pageSize = Integer.parseInt(params.get("pageSize").toString());
+        Map<String, Object> resultMap = userService.getAllUser(currentNum, pageSize);
+        return resultMap;
+    }
 }

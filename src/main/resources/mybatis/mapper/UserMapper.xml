@@ -24,6 +24,10 @@
         and u.password = #{password}
     </select>
 
+    <select id="findAllUser" parameterType="Integer" resultMap="UserResultMap">
+        select * from t_system_user limit #{currentNum}, #{pageSize}
+    </select>
+
     <insert id="addUser" parameterType="com.gnq.giant.system.entities.User">
         insert into t_system_user (username,password,address,email,nick_name)
         values (#{username},#{password},#{address},#{email},#{nickName});

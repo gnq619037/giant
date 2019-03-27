@@ -23,4 +23,6 @@ public interface UserDao {
     public User findUserByNamePassword(@Param("name") String name, @Param("password") String password);
 
     public boolean addUser(User user);
+
+    public List<User> findAllUser(@Param("currentNum") int currentNum, @Param("pageSize") int pageSize);
 }

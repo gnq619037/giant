@@ -1,5 +1,6 @@
 package com.gnq.giant.system.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.gnq.giant.system.dao.UserDao;
 import com.gnq.giant.system.entities.TokenModel;
 import com.gnq.giant.system.entities.User;
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
         }
         String passwordMD5 = MD5.md5(user.getPassword());
         user.setPassword(passwordMD5);
+        userDao.addUser(user);
         resultMap.put("msg", "注册成功");
         resultMap.put("success", true);
         return resultMap;
@@ -97,6 +99,16 @@ public class UserServiceImpl implements UserService {
             return resultMap;
         }
         resultMap.put("msg", "用户登出失败");
+        return resultMap;
+    }
+
+    public Map<String, Object> getAllUser(int currentNum, int pageSize) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        List<User> users = userDao.findAllUser(currentNum, pageSize);
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
+        resultMap.put("count", pageInfo.getTotal());
+        resultMap.put("data", pageInfo.getList());
+        resultMap.put("success", true);
         return resultMap;
     }
 }

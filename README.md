@@ -12,3 +12,5 @@ first version is cell, it will be giant...hold on
 --import log4j2 2019-03-20
 #整合redis
 --import redis 2019-03-21
+#整合page分页插件
+--import page 2019-03-27
