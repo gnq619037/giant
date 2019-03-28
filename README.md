@@ -14,3 +14,5 @@ first version is cell, it will be giant...hold on
 --import redis 2019-03-21
 #整合page分页插件
 --import page 2019-03-27
+#集成swagger接口文档框架
+--import swagger 2019-03-28
