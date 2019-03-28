@@ -1,7 +1,5 @@
 package com.gnq.giant.system.controller;
 
-import com.battcn.swagger.properties.ApiDataType;
-import com.battcn.swagger.properties.ApiParamType;
 import com.gnq.giant.system.entities.User;
 import com.gnq.giant.system.service.TokenManagerInterface;
 import com.gnq.giant.system.service.UserService;
@@ -37,9 +35,6 @@ public class UserController {
     private TokenManagerInterface tokenManagerInterface;
 
     @ApiOperation(value = "条件查询（DONE）")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "用户名", dataType = ApiDataType.STRING, paramType = ApiParamType.QUERY),
-    })
     @RequestMapping(value="/user/get/{name}", method = RequestMethod.GET)
     public Object getUserByNickName(@PathVariable("name") String name){
         List<User> users = userService.getUserByName(name);
