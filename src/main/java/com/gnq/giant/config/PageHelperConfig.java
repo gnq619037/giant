@@ -1,4 +1,4 @@
-package com.gnq.giant.util;
+package com.gnq.giant.config;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;

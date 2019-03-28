@@ -1,9 +1,12 @@
 package com.gnq.giant.system.controller;
 
+import com.battcn.swagger.properties.ApiDataType;
+import com.battcn.swagger.properties.ApiParamType;
 import com.gnq.giant.system.entities.User;
 import com.gnq.giant.system.service.TokenManagerInterface;
 import com.gnq.giant.system.service.UserService;
 
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import java.util.Map;
  * @Description:
  * @Date: 13:45 2019/3/15
  */
+@Api(tags = "1.1", description = "用户管理", value = "用户管理")
 @RestController
 @RequestMapping(value = "/giant")
 public class UserController {
@@ -32,6 +36,10 @@ public class UserController {
     @Autowired
     private TokenManagerInterface tokenManagerInterface;
 
+    @ApiOperation(value = "条件查询（DONE）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", dataType = ApiDataType.STRING, paramType = ApiParamType.QUERY),
+    })
     @RequestMapping(value="/user/get/{name}", method = RequestMethod.GET)
     public Object getUserByNickName(@PathVariable("name") String name){
         List<User> users = userService.getUserByName(name);

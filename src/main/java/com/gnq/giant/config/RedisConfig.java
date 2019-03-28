@@ -1,4 +1,4 @@
-package com.gnq.giant.util;
+package com.gnq.giant.config;
 
 
 import org.springframework.cache.CacheManager;
