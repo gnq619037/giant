@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Mapper
 public interface UserDao {
-    public List<User> findUserByName(String name);
+    public List<User> findUserByName(@Param("name") String name);
 
     public List<User> findUserDuplicated(@Param("username") String username, @Param("nickName") String nickName);
 

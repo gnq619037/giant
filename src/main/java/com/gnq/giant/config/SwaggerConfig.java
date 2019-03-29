@@ -3,6 +3,8 @@ package com.gnq.giant.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -15,28 +17,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan("com.gnq.giant")
 public class SwaggerConfig {
 
-    @Bean
-    public Docket f1xxDocket(){
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .forCodeGeneration(true)
+    @Bean(value = "defaultApi")
+    @Order(value = 4)
+    public Docket defaultApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .groupName("默认接口")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.gnq.giant"))
-                .paths(PathSelectors.regex("/api/f[1-9][0-9][0-9]"))
-                .build()
-                .apiInfo(f1xxApiInfo());
-
-        return docket;
+                .apis(RequestHandlerSelectors.basePackage("com.gnq.giant.system.controller"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
-    private ApiInfo f1xxApiInfo() {
-        ApiInfo apiInfo = new ApiInfo("大标题",//大标题
-                "用户管理相关接口",//小标题
-                "v1.0",//版本
-                "描述",
-                "NightGuo",//作者
-                "NightGuo",//链接显示文字
-                "http://blog.csdn.net/ruglcc"//网站链接
-        );
-        return apiInfo;
+    private ApiInfo apiInfo(){
+        return new ApiInfoBuilder()
+                .title("giantAPI接口文档")
+                .description("swagger-bootstrap-ui-demo RESTful APIs")
+                .termsOfServiceUrl("https://github.com/gnq619037/giant")
+                .contact("oumz@gnq.com.cn")
+                .version("1.0")
+                .build();
     }
 }

@@ -21,7 +21,7 @@ import java.util.Map;
  * @Description:
  * @Date: 13:45 2019/3/15
  */
-@Api(tags = "1.1", description = "用户管理", value = "用户管理")
+@Api(tags = "1.0", description = "用户管理", value = "用户管理")
 @RestController
 @RequestMapping(value = "/giant")
 public class UserController {
@@ -34,7 +34,10 @@ public class UserController {
     @Autowired
     private TokenManagerInterface tokenManagerInterface;
 
-    @ApiOperation(value = "条件查询（DONE）")
+    @ApiOperation(value = "通过用户名或者昵称查询用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名或昵称")
+    })
     @RequestMapping(value="/user/get/{name}", method = RequestMethod.GET)
     public Object getUserByNickName(@PathVariable("name") String name){
         List<User> users = userService.getUserByName(name);
