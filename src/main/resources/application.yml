@@ -9,7 +9,6 @@ mybatis:
   mapperLocations: classpath:mybatis/mapper/*.xml
 logging:
   config: classpath:log4j.xml
-
 ---
 
 #开发配置
@@ -35,6 +34,11 @@ spring:
         max-idle: 20 # 连接池中的最大空闲连接
         min-idle: 5 #连接池中的最小空闲连接
         max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  data:
+    neo4j:
+      uri: bolt://localhost:7687
+      username: neo4j
+      password: 123456
 #  swagger:
 #    enabled: true
 #    base-package: com.gnq.giant.system.controller
