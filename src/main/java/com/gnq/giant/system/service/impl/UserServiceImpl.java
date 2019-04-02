@@ -111,4 +111,10 @@ public class UserServiceImpl implements UserService {
         resultMap.put("success", true);
         return resultMap;
     }
+
+    public Map<String, Object> batchModify(List<User> users) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        userDao.updateUsers(users);
+        return resultMap;
+    }
 }

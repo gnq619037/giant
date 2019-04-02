@@ -25,4 +25,6 @@ public interface UserDao {
     public boolean addUser(User user);
 
     public List<User> findAllUser(@Param("currentNum") int currentNum, @Param("pageSize") int pageSize);
+
+    int updateUsers(List<User> users);
 }

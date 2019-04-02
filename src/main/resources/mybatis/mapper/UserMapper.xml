@@ -32,4 +32,21 @@
         insert into t_system_user (username,password,address,email,nick_name)
         values (#{username},#{password},#{address},#{email},#{nickName});
     </insert>
+
+    <update id="updateUsers" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update t_system_user
+            <set>
+                <if test="item.username != null and item.username != '' ">
+                    username = #{item.username, jdbcType=VARCHAR},
+                </if>
+                <if test="item.password != null and item.password !='' ">
+                    password = #{item.password, jdbcType=VARCHAR}
+                </if>
+            </set>
+            <where>
+                id = #{item.id, jdbcType=INTEGER}
+            </where>
+        </foreach>
+    </update>
 </mapper>

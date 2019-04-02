@@ -25,4 +25,6 @@ public interface UserService {
     public Map<String, Object> userLogout(String token);
 
     public Map<String, Object> getAllUser(int currentNum, int pageSize);
+
+    Map<String, Object> batchModify(List<User> users);
 }

@@ -86,4 +86,10 @@ public class UserController {
         Map<String, Object> resultMap = userService.getAllUser(currentNum, pageSize);
         return resultMap;
     }
+
+    @RequestMapping(value = "/users/update", method = RequestMethod.POST)
+    public Object getAllUser(@RequestBody List<User> users){
+        Map<String, Object> resultMap = userService.batchModify(users);
+        return resultMap;
+    }
 }

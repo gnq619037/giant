@@ -20,7 +20,7 @@ spring:
     name: microservicecloud-dept
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/giant
+    url: jdbc:mysql://localhost:3306/giant?allowMultiQueries=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
