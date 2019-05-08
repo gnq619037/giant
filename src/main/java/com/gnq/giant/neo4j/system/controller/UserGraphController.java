@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/graph")
+@RequestMapping("/giant/graph")
 public class UserGraphController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class UserGraphController {
 
     @RequestMapping(value="/user/add", method = RequestMethod.POST)
     public Object register(@RequestBody UserGraph user){
-        user.setUuid(UUID.randomUUID().toString());
+//        user.setUuid(UUID.randomUUID().toString());
         userGraphService.addUser(user);
         return null;
     }
@@ -34,7 +34,11 @@ public class UserGraphController {
 
     @RequestMapping(value = "/user/relation/family", method = RequestMethod.POST)
     public Object createFamily(@RequestBody FamilyRelation familyRelation){
-        return userGraphService.createFamily(familyRelation.getStartUserGraph().getUuid(),
-                familyRelation.getEndUserGraph().getUuid());
+        return userGraphService.createFamily(familyRelation);
+    }
+
+    @RequestMapping(value = "/user/relation/users", method = RequestMethod.POST)
+    public Object getRelationUser(@RequestBody UserGraph userGraph){
+        return userGraphService.getRelationUser(userGraph.getUserName());
     }
 }

@@ -2,10 +2,12 @@ package com.gnq.giant.system.service.impl;
 
 import com.github.pagehelper.PageInfo;
 import com.gnq.giant.system.dao.UserDao;
+import com.gnq.giant.system.dto.UserDTO;
 import com.gnq.giant.system.entities.TokenModel;
 import com.gnq.giant.system.entities.User;
 import com.gnq.giant.system.service.TokenManagerInterface;
 import com.gnq.giant.system.service.UserService;
+import com.gnq.giant.util.GiantResponse;
 import com.gnq.giant.util.MD5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +55,7 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
         resultMap.put("msg", "注册成功");
         resultMap.put("success", true);
+//        new GiantResponse<User>().result().msg()
         return resultMap;
     }
 
@@ -107,7 +110,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userDao.findAllUser(currentNum, pageSize);
         PageInfo<User> pageInfo = new PageInfo<User>(users);
         resultMap.put("count", pageInfo.getTotal());
-        resultMap.put("data", pageInfo.getList());
+        resultMap.put("result", pageInfo.getList());
         resultMap.put("success", true);
         return resultMap;
     }
@@ -115,6 +118,28 @@ public class UserServiceImpl implements UserService {
     public Map<String, Object> batchModify(List<User> users) {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         userDao.updateUsers(users);
+        return resultMap;
+    }
+
+    public Map<String, Object> getUserByLoginName(User user) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        User returnUser =  userDao.getUserByLoginName(user);
+        resultMap.put("success", true);
+        resultMap.put("data", returnUser);
+        return resultMap;
+    }
+
+    public Map<String, Object> checkIsLogin(UserDTO userDTO) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Boolean isLogin = tokenManagerInterface.checkToken(userDTO.getToken());
+        resultMap.put("success", isLogin);
+        return resultMap;
+    }
+
+    public Map<String, Object> deleteUser(UserDTO userDTO) {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        userDao.deleteUser(userDTO);
+        resultMap.put("success", true);
         return resultMap;
     }
 }

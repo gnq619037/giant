@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gnq.giant.system.dao.UserDao" >
-    <cache></cache>
+    <!--<cache></cache>-->
     <resultMap id="UserResultMap" type="com.gnq.giant.system.entities.User" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="username" property="username" jdbcType="VARCHAR" />
@@ -9,6 +9,7 @@
         <result column="address" property="address" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="findUserByName" parameterType="String" resultMap="UserResultMap">
@@ -25,12 +26,19 @@
     </select>
 
     <select id="findAllUser" parameterType="Integer" resultMap="UserResultMap">
-        select * from t_system_user limit #{currentNum}, #{pageSize}
+        select * from t_system_user
+        <if test="currentNum != null and currentNum !='' and pageSize != null and pageSize !='' ">
+            limit #{currentNum}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getUserByLoginName" parameterType="com.gnq.giant.system.entities.User" resultMap="UserResultMap">
+        select * from t_system_user WHERE username = #{username}
     </select>
 
     <insert id="addUser" parameterType="com.gnq.giant.system.entities.User">
-        insert into t_system_user (username,password,address,email,nick_name)
-        values (#{username},#{password},#{address},#{email},#{nickName});
+        insert into t_system_user (username,password,address,email,nick_name,tel_phone)
+        values (#{username},#{password},#{address},#{email},#{nickName},#{telPhone});
     </insert>
 
     <update id="updateUsers" parameterType="java.util.List">
@@ -49,4 +57,8 @@
             </where>
         </foreach>
     </update>
+
+    <delete id="deleteUser" parameterType="com.gnq.giant.system.dto.UserDTO">
+        DELETE FROM t_system_user where id = #{id, jdbcType=BIGINT}
+    </delete>
 </mapper>

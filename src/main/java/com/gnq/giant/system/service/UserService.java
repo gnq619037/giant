@@ -1,5 +1,6 @@
 package com.gnq.giant.system.service;
 
+import com.gnq.giant.system.dto.UserDTO;
 import com.gnq.giant.system.entities.User;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface UserService {
     public Map<String, Object> getAllUser(int currentNum, int pageSize);
 
     Map<String, Object> batchModify(List<User> users);
+
+    Map<String, Object> getUserByLoginName(User user);
+
+    Map<String, Object> checkIsLogin(UserDTO userDTO);
+
+    Map<String, Object> deleteUser(UserDTO userDTO);
 }

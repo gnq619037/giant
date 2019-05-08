@@ -10,17 +10,14 @@ import java.util.Collection;
 
 @Component
 public interface UserRepository extends Neo4jRepository<UserGraph, Long> {
-//    @Query("MATCH (n:UserGraph) RETURN n ")
-//    List<UserGraph> getUserNodeList();
-//
-//    @Query("create (n:UserGraph{age:{age},name:{name}}) RETURN n ")
-//    List<UserGraph> addUserNodeList(@Param("name") String name, @Param("age")int age);
-
-    @Query("create (n:UserGraph{uuid:{uuid},userName:{userName}}) return n ")
-    UserGraph addUserNode(@Param("userName") String userName, @Param("uuid") String uuid);
+    @Query("create (n:UserGraph{userName:{userName}}) return n ")
+    UserGraph addUserNode(@Param("userName") String userName);
 
     UserGraph findByUserName(@Param("userName") String userName);
 
-    @Query("Match (a:UserGraph),(b:UserGraph) where a.uuid = {startId} and b.uuid = {endId} Merge (a)-[r:family]-(b)")
-    Collection<UserGraph> createFamilyRelation(@Param("startId") String startId, @Param("endId") String endId);
+    @Query("Match (a:UserGraph),(b:UserGraph) where a.userName = {startUserName} and b.userName = {endUserName} Merge (a)-[r:family]-(b)")
+    Collection<UserGraph> createFamilyRelation(@Param("startUserName") String startUserName, @Param("endUserName") String endUserName);
+
+    @Query("Match (a:UserGraph)-[r]-(b:UserGraph) where a.userName = {username} return a,b,r")
+    Collection<UserGraph> getMyRelationUser(@Param("username") String username);
 }

@@ -1,5 +1,6 @@
 package com.gnq.giant.system.dao;
 
+import com.gnq.giant.system.dto.UserDTO;
 import com.gnq.giant.system.entities.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,8 @@ public interface UserDao {
     public List<User> findAllUser(@Param("currentNum") int currentNum, @Param("pageSize") int pageSize);
 
     int updateUsers(List<User> users);
+
+    User getUserByLoginName(User user);
+
+    int deleteUser(UserDTO userDTO);
 }

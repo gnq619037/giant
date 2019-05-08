@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gnq.giant.system.dao.CityDao" >
+    <!--<cache></cache>-->
+    <resultMap id="UserResultMap" type="com.gnq.giant.system.dto.CityDTO" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="father_id" property="fatherId" jdbcType="BIGINT" />
+        <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+    </resultMap>
+    <select id="findAll" parameterType="com.gnq.giant.system.dto.CityDTO" resultMap="UserResultMap">
+        SELECT * from t_city
+        <where>1=1
+            <if test="level != null">
+                and level = #{level, jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+</mapper>
