@@ -1,4 +1,4 @@
-项目命名为giant,意为巨人,从细胞开始构建，一步一步成长为巨人。
+
 # giant
 maven:apache-maven-3.2.5
 git:git version 2.8.1.windows.1
